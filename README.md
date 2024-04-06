@@ -26,3 +26,6 @@ how to, local copy, [hack/UNO_8U2_16U2_DFU.pdf](hack/UNO_8U2_16U2_DFU.pdf)
 https://docs.arduino.cc/retired/hacking/software/DFUProgramming8U2/   
 firmware  
 https://github.com/arduino/ArduinoCore-avr/tree/master/firmwares/atmegaxxu2   
+
+for adding 10k pull down resistor, not 1k as R3 used ?  
+![hack/R1adding10k.JPG](hack/R1adding10k.JPG)
