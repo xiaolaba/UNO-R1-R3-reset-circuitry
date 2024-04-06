@@ -21,6 +21,6 @@ UNO R.1, and UNO R.3, the RESET circuit via pullup 10K resistor and adding a dio
 
 how to upgrade 8u2/16u2 firmware and why  
 how to, local copy, [hack/UNO_8U2_16U2_DFU.pdf](hack/UNO_8U2_16U2_DFU.pdf)  
-```https://docs.arduino.cc/retired/hacking/software/DFUProgramming8U2/```  
+https://docs.arduino.cc/retired/hacking/software/DFUProgramming8U2/   
 firmware  
-```https://github.com/arduino/ArduinoCore-avr/tree/master/firmwares/atmegaxxu2```  
+https://github.com/arduino/ArduinoCore-avr/tree/master/firmwares/atmegaxxu2   
