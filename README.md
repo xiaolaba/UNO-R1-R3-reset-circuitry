@@ -51,9 +51,10 @@ job done
 
 
 ### how to comply the firmnware for 8u2
-donwload the code or clone from github https://github.com/harlequin-tech/arduino-usb, the author was saying that LUFA version 100807 was used.  
+donwload the code, this local copy [arduino-usb-master.zip](arduino-usb-master.zip)  
+or clone from github https://github.com/harlequin-tech/arduino-usb, the author was saying that LUFA version 100807 was used.  
+.  
 linux and commands following,
-
 ```
 sudo apt list --upgradable
 sudo apt update
@@ -73,6 +74,9 @@ the firmware should be able to build upon completion
 ### how to get this very own firmware for 8u2 ?
 go to folder firmwares\arduino-serial\  
 patch 2 files and then complie the code again
+patched copies,  
+[Arduino-usbserial.c](Arduino-usbserial.c)    
+[makefile](makefile)  
 
 
 1. patch Arduino-usbserial.c  
