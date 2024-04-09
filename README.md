@@ -5,17 +5,19 @@ this is not good design anyway
 
 ### makes it better
 how and why was that working, the modified circuit design.  
-#### the software,  
-8u2-burn.bat, to brun Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex to the chip,  
-burn_arduino_com8.bat, to burn 328p.hex to mega328p, or uses Arduino IDE,   
+   
 [hack/UNO_Rev1_2_3_mod.pdf](hack/UNO_Rev1_2_3_mod.pdf)    
 C5, replaced by a SMT diode, actually it was unknown transistor with one leg trimmed off.  
 ![hack/c5_used_diode.JPG](hack/c5_used_diode.JPG)  
-
+.  
+.  
+#### the software,  
+8u2-burn.bat, to brun Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex to the chip,  
+burn_arduino_com8.bat, to burn 328p.hex to mega328p, or uses Arduino IDE,
 Arduino UNO
 USB VID_0x2341 PID_0x0043 REV_0x0001  
 
-
+### why saying that  
 DTR provide reset signal, it is likely a charge pump circuit to the reset pin of Mega328 MCU  
 UNO R.1, and UNO R.3, the RESET circuit via pullup 10K resistor and adding a diode to protect 328P, it is saying the malfunction and reliability had been compromised on UNO R.1
 ![hack/R1R3_diff.JPG](hack/R1R3_diff.JPG)
@@ -33,7 +35,7 @@ UNO R.1, and UNO R.3, the RESET circuit via pullup 10K resistor and adding a dio
 
 
 
-how to upgrade 8u2/16u2 firmware and why  
+### how to upgrade 8u2/16u2 firmware and why  
 how to, local copy, [hack/UNO_8U2_16U2_DFU.pdf](hack/UNO_8U2_16U2_DFU.pdf)  
 https://docs.arduino.cc/retired/hacking/software/DFUProgramming8U2/   
 firmware  
@@ -44,9 +46,9 @@ for adding 10k pull down resistor, not 1k as R3 used ?
 
 
 ### a better way for mega328p & reset circuit
-load the new firmware to 8u2 chip, [Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex](Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex)
-replace the capacitor with a diode (the faulty board, the cap was missing missing anyway, the circuit
-job done
+load this modified firmware to 8u2 chip, [Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex](Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex)
+replace the capacitor with a diode (the faulty board, the cap was missing missing anyway, the circuit,  
+job done  
 ![hack/DTR-to-mega328-RESET.JPG](hack/DTR-to-mega328-RESET.JPG)  
 
 
@@ -71,7 +73,7 @@ make
 the firmware should be able to build upon completion
 
 
-### how to get this very own firmware for 8u2 ?
+### how to get this very own modified firmware for 8u2 ?
 go to folder firmwares\arduino-serial\  
 patch 2 files and then complie the code again
 patched copies,  
