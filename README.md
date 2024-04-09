@@ -57,7 +57,7 @@ cd arduino-usb-master/firmwares/arduino-usbserial
 make
 ```
 
-the firware should be able to build upon completion
+the firmware should be able to build upon completion
 
 
 ### how to get this very own firmware for 8u2 ?
