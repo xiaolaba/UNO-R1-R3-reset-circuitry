@@ -130,3 +130,22 @@ all: begin gccversion sizebefore build showliboptions showtarget sizeafter copy_
 copy_hex:
 	cp $(TARGET).hex $(TARGET)-$(MCU)-Uno-Rev1-PID_$(ARDUINO_MODEL_PID)-xiaolaba.hex
 ```
+
+
+### hack folder and file list
+![hack/ATmega8U2_16U232U2-Complete-Datasheet.pdf](hack/ATmega8U2_16U232U2-Complete-Datasheet.pdf)  
+![hack/c5_used_diode.JPG](hack/c5_used_diode.JPG)  
+![hack/DTR-to-mega328-RESET.JPG](hack/DTR-to-mega328-RESET.JPG)  
+![hack/missing_cap_diode.JPG](hack/missing_cap_diode.JPG)  
+![hack/R1adding10k.JPG](hack/R1adding10k.JPG)  
+![hack/R1R3_bottom.jpg](hack/R1R3_bottom.jpg)  
+![hack/R1R3_diff.JPG](hack/R1R3_diff.JPG)  
+![hack/R1R3_top.jpg](hack/R1R3_top.jpg)  
+![hack/temp.txt](hack/temp.txt)  
+![hack/UNO_8U2_16U2_DFU.pdf](hack/UNO_8U2_16U2_DFU.pdf)  
+![hack/uno_diode.jpg](hack/uno_diode.jpg)  
+![hack/uno_faulty_board.jpg](hack/uno_faulty_board.jpg)  
+![hack/uno_missing_cap.jpg](hack/uno_missing_cap.jpg)  
+![hack/UNO_R3_R1.JPG](hack/UNO_R3_R1.JPG)  
+![hack/UNO_Rev1_2_3_mod.pdf](hack/UNO_Rev1_2_3_mod.pdf)  
+![hack/USB-DFU-Bootloader-Datasheet.pdf](hack/USB-DFU-Bootloader-Datasheet.pdf)  
