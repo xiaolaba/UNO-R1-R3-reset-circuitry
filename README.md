@@ -5,6 +5,9 @@ this is not good design anyway
 
 ### makes it better
 how and why was that working, the modified circuit design
+the software  
+8u2-burn.bat, to brun Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex to the chip  
+burn_arduino_com8.bat, to burn 328p.hex to mega328p, or uses Arduino IDE as well  
 [hack/UNO_Rev1_2_3_mod.pdf](hack/UNO_Rev1_2_3_mod.pdf)    
 ![hack/c5_used_diode.JPG](hack/c5_used_diode.JPG)  
 
