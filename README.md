@@ -75,8 +75,8 @@ the firmware should be able to build upon completion
 
 ### how to get this very own modified firmware for 8u2 ?
 go to folder firmwares\arduino-serial\  
-patch 2 files and then complie the code again
-patched copies,  
+patch 2 files and then complie the code again.  
+my patched copies,  
 [Arduino-usbserial.c](Arduino-usbserial.c)    
 [makefile](makefile)  
 
