@@ -33,3 +33,94 @@ https://github.com/arduino/ArduinoCore-avr/tree/master/firmwares/atmegaxxu2
 
 for adding 10k pull down resistor, not 1k as R3 used ?  
 ![hack/R1adding10k.JPG](hack/R1adding10k.JPG)
+
+
+### a better way for mega328p & reset circuit
+load the new firmware to 8u2 chip, [Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex](Arduino-usbserial-atmega8u2-Uno-Rev1-PID_0x0001-xiaolaba.hex)
+replace the capacitor with a diode (the faulty board, the cap was missing missing anyway, the circuit
+job done
+
+### how to comply the firmnware for 8u2
+donwload the code or clone from github https://github.com/harlequin-tech/arduino-usb, the author was saying that LUFA version 100807 was used.  
+linux and commands following,
+
+```
+sudo apt list --upgradable
+sudo apt update
+sudo apt upgrade
+sudo apt-get install gcc-avr binutils-avr avr-libc dfu-programmer
+
+avr-gcc -v
+wget https://github.com/harlequin-tech/arduino-usb/archive/refs/heads/master.zip
+unzip master.zip
+cd arduino-usb-master/firmwares/arduino-usbserial
+make
+```
+
+the firware should be able to build upon completion
+
+
+### how to get this very own firmware for 8u2 ?
+go to folder firmwares\arduino-serial\  
+patch 2 files and then complie the code again
+
+
+1. patch Arduino-usbserial.c  
+```
+/** Event handler for the CDC Class driver Host-to-Device Line Encoding Changed event.
+ *
+ *  \param[in] CDCInterfaceInfo  Pointer to the CDC class interface configuration structure being referenced
+ */
+// UNO R.1 and UNO R.3 reset circuitry,
+// a capacitor has to be used for RESET pulse generation, and protection diode for RESET pin
+// as DTR always low during COM port manipulated, 
+ /*
+ void EVENT_CDC_Device_ControLineStateChanged(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+{
+	bool CurrentDTRState = (CDCInterfaceInfo->State.ControlLineStates.HostToDevice & CDC_CONTROL_LINE_OUT_DTR);
+
+	if (CurrentDTRState)
+	  AVR_RESET_LINE_PORT &= ~AVR_RESET_LINE_MASK;
+	else
+	  AVR_RESET_LINE_PORT |= AVR_RESET_LINE_MASK;
+}
+*/
+
+// change code design,  
+// DTR high/low/high transistion to generate RESET pulse for mega328p, each time the COM port is opened, this code executed once.
+// pulse with is 36us to 1000us, all ok for auto reset when Arduino UNO is required to burn firmware, uses 512us
+// xiaolaba 2018-04-27
+
+#include <util/delay.h> // for _delay_us(10); // 2018-04-27 xiaolaba
+
+void EVENT_CDC_Device_ControLineStateChanged(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+{
+	bool CurrentDTRState = (CDCInterfaceInfo->State.ControlLineStates.HostToDevice & CDC_CONTROL_LINE_OUT_DTR);
+
+	if (CurrentDTRState) {
+//	  AVR_RESET_LINE_PORT |= AVR_RESET_LINE_MASK; //DTR high. default is high, see SetupHardware(void)
+//	  _delay_us(250); //
+
+	  AVR_RESET_LINE_PORT &= ~AVR_RESET_LINE_MASK; //DTR low, active low, the reset pulse for mega328p, 512us
+	  _delay_us(512); // 2018-04-27 xiaolaba
+
+	  AVR_RESET_LINE_PORT |= AVR_RESET_LINE_MASK; //DTR high, reset DTR to high
+	}
+	else {
+//	  AVR_RESET_LINE_PORT |= AVR_RESET_LINE_MASK; //DTR high
+	}
+}
+
+```
+
+2. patch makefile
+```
+# Default target.
+#all: begin gccversion sizebefore build checkinvalidevents showliboptions showtarget sizeafter end
+#all: begin gccversion sizebefore build showliboptions showtarget sizeafter end
+all: begin gccversion sizebefore build showliboptions showtarget sizeafter copy_hex end
+
+## for xiaolaba, very own firmware for modified clone board of UNO R.1
+copy_hex:
+	cp $(TARGET).hex $(TARGET)-$(MCU)-Uno-Rev1-PID_$(ARDUINO_MODEL_PID)-xiaolaba.hex
+```
